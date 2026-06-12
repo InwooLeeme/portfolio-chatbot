@@ -1,0 +1,5 @@
+/* 임베드 전용: 둥근 모서리·그림자는 부모 패널이 담당하므로 iframe body는 투명 */
+html,
+body {
+  background: transparent !important;
+}
