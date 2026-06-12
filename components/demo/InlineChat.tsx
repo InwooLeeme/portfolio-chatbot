@@ -19,7 +19,7 @@ export function InlineChat() {
   };
 
   return (
-    <section className="mt-10 overflow-hidden rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)]">
+    <section className="overflow-hidden rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)]">
       <button
         type="button"
         onClick={toggle}
