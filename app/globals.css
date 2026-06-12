@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* 테마는 CSS 변수로만 제어. :root=라이트, [data-theme="dark"]=다크, 미지정 시 OS(auto). */
+
+/* Tailwind dark: 유틸이 data-theme 속성을 따르게 함 */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --muted: #6b7280;
+  --muted-bg: #f3f4f6;
+  --border: #e5e7eb;
+  --card: #ffffff;
+  --input: #ffffff;
+  --bubble-user-bg: #0d9488; /* teal-600 accent */
+  --bubble-user-fg: #ffffff;
+  --bubble-bot-bg: #f3f4f6;
+  --bubble-bot-fg: #1a1a1a;
+  --accent: #0d9488;
+  --accent-hover: #0f766e;
+  --accent-fg: #ffffff;
+  --chip-bg: #f0fdfa;
+  --chip-fg: #0f766e;
+  --chip-border: #99f6e4;
+  --ring: #14b8a6;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --radius: 0.875rem;
+}
+
+/* 명시적 다크 */
+[data-theme="dark"] {
+  --background: #0f1115;
+  --foreground: #e6e6e6;
+  --muted: #9ca3af;
+  --muted-bg: #1b1f29;
+  --border: #2a2f3a;
+  --card: #151821;
+  --input: #151821;
+  --bubble-user-bg: #14b8a6;
+  --bubble-user-fg: #04201d;
+  --bubble-bot-bg: #1b1f29;
+  --bubble-bot-fg: #e6e6e6;
+  --accent: #2dd4bf;
+  --accent-hover: #5eead4;
+  --accent-fg: #04201d;
+  --chip-bg: #0c2b27;
+  --chip-fg: #5eead4;
+  --chip-border: #115e57;
+  --ring: #2dd4bf;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* auto: data-theme 미지정 + OS가 다크일 때 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --background: #0f1115;
+    --foreground: #e6e6e6;
+    --muted: #9ca3af;
+    --muted-bg: #1b1f29;
+    --border: #2a2f3a;
+    --card: #151821;
+    --input: #151821;
+    --bubble-user-bg: #14b8a6;
+    --bubble-user-fg: #04201d;
+    --bubble-bot-bg: #1b1f29;
+    --bubble-bot-fg: #e6e6e6;
+    --accent: #2dd4bf;
+    --accent-hover: #5eead4;
+    --accent-fg: #04201d;
+    --chip-bg: #0c2b27;
+    --chip-fg: #5eead4;
+    --chip-border: #115e57;
+    --ring: #2dd4bf;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* CSS 변수를 Tailwind 토큰으로 노출 → bg-background, text-foreground 등 사용 가능 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-bg: var(--muted-bg);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-input: var(--input);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-bubble-user-bg: var(--bubble-user-bg);
+  --color-bubble-user-fg: var(--bubble-user-fg);
+  --color-bubble-bot-bg: var(--bubble-bot-bg);
+  --color-bubble-bot-fg: var(--bubble-bot-fg);
+  --color-chip-bg: var(--chip-bg);
+  --color-chip-fg: var(--chip-fg);
+  --color-chip-border: var(--chip-border);
+  --color-ring: var(--ring);
+  --radius-card: var(--radius);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
