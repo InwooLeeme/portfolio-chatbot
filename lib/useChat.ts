@@ -32,9 +32,15 @@ export function useChat(initial: UiMessage[]) {
       const botMsg: UiMessage = { id: botId, role: "assistant", content: "" };
 
       // API에 보낼 히스토리(추천 칩 같은 메타는 제외, content만).
-      const payload: ChatMessage[] = [...messagesRef.current, userMsg]
-        .filter((m) => m.content.trim().length > 0)
-        .map((m) => ({ role: m.role, content: m.content }));
+      // 첫 user 메시지 앞의 assistant(캔드 인사말)는 실제 대화가 아니므로 제외 —
+      // 안 그러면 첫 질문인데도 서버가 history로 보고 불필요한 rephrase를 돌린다.
+      const withUser = [...messagesRef.current, userMsg].filter(
+        (m) => m.content.trim().length > 0,
+      );
+      const firstUserIdx = withUser.findIndex((m) => m.role === "user");
+      const payload: ChatMessage[] = (
+        firstUserIdx >= 0 ? withUser.slice(firstUserIdx) : withUser
+      ).map((m) => ({ role: m.role, content: m.content }));
 
       setMessages((prev) => [...prev, userMsg, botMsg]);
       setIsStreaming(true);
