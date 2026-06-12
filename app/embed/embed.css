@@ -2,4 +2,9 @@
 html,
 body {
   background: transparent !important;
+  height: 100%;
+  margin: 0;
+  /* 챗봇은 뷰포트(h-dvh)를 꽉 채우고 메시지 영역만 내부 스크롤하므로
+     문서 자체에는 스크롤이 필요 없다. 펼칠 때 생기던 iframe 스크롤바를 차단. */
+  overflow: hidden;
 }
