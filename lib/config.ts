@@ -48,8 +48,8 @@ export const portfolio = loadPortfolio();
 // RAG / 생성 / 가드 관련 상수
 export const config = {
   models: {
-    generation: "gemini-2.0-flash",
-    embedding: "text-embedding-004",
+    generation: "gemini-2.5-flash",
+    embedding: "gemini-embedding-001",
   },
   rag: {
     topK: 4, // 벡터 유사도 검색으로 가져올 관련 항목 수 (k=4)

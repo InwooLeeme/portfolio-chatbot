@@ -22,7 +22,7 @@ LangChain.js로 검색·생성 파이프라인을 구성하고, 임베딩과 답
 - Next.js 16 (App Router) · React 19 · TypeScript
 - Tailwind CSS 4
 - LangChain.js
-- Google Gemini — 생성 `gemini-2.0-flash`, 임베딩 `text-embedding-004`
+- Google Gemini — 생성 `gemini-2.5-flash`, 임베딩 `gemini-embedding-001`
 - Upstash Redis (레이트리밋, 선택)
 
 ## 동작 구조
