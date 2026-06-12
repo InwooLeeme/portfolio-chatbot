@@ -26,34 +26,24 @@ const emptyPortfolio: Portfolio = {
   certifications: [],
 };
 
-// 실데이터 로드: 환경변수(PORTFOLIO_JSON) → 로컬 파일(gitignore됨) → 빈 기본값.
-// 정적 import를 쓰지 않아 파일이 없어도 빌드가 깨지지 않음.
+// 환경변수(PORTFOLIO_JSON) → 로컬 파일 → 빈 기본값 순으로 폴백.
+// 정적 import를 피해 데이터 파일이 없어도 빌드가 깨지지 않게 한다.
 function loadPortfolio(): Portfolio {
   if (process.env.PORTFOLIO_JSON) {
     try {
       return { ...emptyPortfolio, ...JSON.parse(process.env.PORTFOLIO_JSON) };
-    } catch {
-      // 잘못된 JSON이면 다음 소스로 폴백
-    }
+    } catch {}
   }
   try {
     const p = path.join(process.cwd(), "data", "portfolio.json");
     if (fs.existsSync(p)) {
       return { ...emptyPortfolio, ...JSON.parse(fs.readFileSync(p, "utf8")) };
     }
-  } catch {
-    // 파일 읽기 실패 시 빈 기본값
-  }
+  } catch {}
   return emptyPortfolio;
 }
 
 export const portfolio = loadPortfolio();
-
-// 허용 origin 목록 (CORS allow-list 및 frame-ancestors). 끝 슬래시 제거.
-export const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? "")
-  .split(",")
-  .map((o) => o.trim().replace(/\/$/, ""))
-  .filter(Boolean);
 
 // RAG / 생성 / 가드 관련 상수
 export const config = {
